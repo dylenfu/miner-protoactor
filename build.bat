@@ -1,0 +1,1 @@
+protoc --proto_path=$GOPATH/src -I messages/ messages/*.proto --gogoslick_out=plugins=grpc:messages
