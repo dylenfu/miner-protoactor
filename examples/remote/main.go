@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-var fn = flag.String("fn", "server", "select server or client")
+var (
+	fn         = flag.String("fn", "server", "select server or client")
+	serverAddr = flag.String("server", "localhost:9090", "server address")
+	clientAddr = flag.String("client", "localhost:9091", "client address")
+)
 
 type Handle struct{}
 
@@ -36,22 +40,17 @@ func newHelloActor() actor.Actor {
 	return &helloActor{}
 }
 
-const (
-	ServerAddr = "localhost:9090"
-	ClientAddr = "localhost:9091"
-	timeout    = 1 * time.Second
-)
-
 func (h *Handle) Server() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	remote.Register("hello", actor.FromProducer(newHelloActor))
-	remote.Start(ServerAddr)
+	remote.Start(*serverAddr)
 	console.ReadLine()
 }
 
 func (h *Handle) Client() {
-	remote.Start(ClientAddr)
-	pidResp, _ := remote.SpawnNamed(ServerAddr, "remote", "hello", timeout)
+	remote.Start(*clientAddr)
+	timeout := 1 * time.Second
+	pidResp, _ := remote.SpawnNamed(*serverAddr, "remote", "hello", timeout)
 	pid := pidResp.Pid
 	for i := 0; i < 1000; i++ {
 		res, _ := pid.RequestFuture(&messages.HelloRequest{Who: fmt.Sprintf("grade no %d ", i)}, timeout).Result()
