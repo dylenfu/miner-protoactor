@@ -6,18 +6,20 @@ import (
 	"github.com/AsynkronIT/protoactor-go/remote"
 	"github.com/dylenfu/miner-protoactor/messages"
 	"runtime"
+	"flag"
 )
 
-const serverAddress = "127.0.0.1:9090"
+var address = flag.String("addr", "127.0.0.1:9090", "set server address")
 
 func main() {
-	//flag.Parse()
+	flag.Parse()
+
 	//handle := &Handle{}
 	//reflect.ValueOf(handle).MethodByName(*fn).Call([]reflect.Value{})
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	remote.Register("hello", actor.FromProducer(newHelloActor))
-	remote.Start(serverAddress)
+	remote.Start(*address)
 	console.ReadLine()
 }
 
