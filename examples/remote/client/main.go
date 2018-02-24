@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	clientAddress = "127.0.0.1:9091"
-	serverAddress = "ec2-13-112-62-24.ap-northeast-1.compute.amazonaws.com:9090"
+	clientAddress = "10.137.108.184:9091"
+	serverAddress = "ec2-52-196-115-12.ap-northeast-1.compute.amazonaws.com:9090"
 )
 
 func main() {
