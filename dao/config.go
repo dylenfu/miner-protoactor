@@ -22,4 +22,27 @@ func NewDb(options *config.MysqlOptions) {
 	dao.LogMode(options.Debug)
 
 	db = dao
+
+	prepare()
+}
+
+func prepare() {
+	var tables []interface{}
+
+	// create tables if not exists
+	tables = append(tables, &Transaction{})
+	tables = append(tables, &Transfer{})
+
+	for _, t := range tables {
+		if ok := db.HasTable(t); !ok {
+			if err := db.CreateTable(t).Error; err != nil {
+				log.Fatalf("create mysql table error:%s", err.Error())
+			}
+		}
+	}
+
+	// auto migrate to keep schema update to date
+	// AutoMigrate will ONLY create tables, missing columns and missing indexes,
+	// and WON'T change existing column's type or delete unused columns to protect your data
+	db.AutoMigrate(tables...)
 }
