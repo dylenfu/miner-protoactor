@@ -6,11 +6,12 @@ import (
 )
 
 type Transaction struct {
-	From   string
-	To     string
-	Hash   string
-	Value  []byte
-	Failed bool
+	ID int `gorm:"column:id;primary_key""`
+	From   string `gorm:"column:tx_from;type:varchar(42)"`
+	To     string `gorm:"column:tx_to;type:varchar(42)"`
+	Hash   string `gorm:"column:tx_hash;type:varchar(82)"`
+	Value  []byte `gorm:"column:tx_value;type:varchar(30)"`
+	Failed bool   `gorm:"column:tx_failed"`
 }
 
 func NewTransactionViewActor() actor.Actor {
