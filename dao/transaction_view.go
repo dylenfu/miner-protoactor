@@ -2,7 +2,6 @@ package dao
 
 import (
 	"github.com/AsynkronIT/protoactor-go/actor"
-	"github.com/AsynkronIT/protoactor-go/remote"
 	"github.com/dylenfu/miner-protoactor/messages"
 )
 
@@ -14,11 +13,7 @@ type Transaction struct {
 	Failed bool
 }
 
-func RegisterTransactionViewActor(name string) {
-	remote.Register(name, actor.FromProducer(newTransactionViewActor))
-}
-
-func newTransactionViewActor() actor.Actor {
+func NewTransactionViewActor() actor.Actor {
 	return &TransactionViewActor{}
 }
 
