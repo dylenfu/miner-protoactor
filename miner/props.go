@@ -12,6 +12,10 @@ func init() {
 
 	NewDb(&conf.Mysql)
 
+	props()
+}
+
+func props() {
 	remote.Register("transaction-view", actor.FromProducer(NewTransactionViewActor))
 	remote.Register("transfer-view", actor.FromProducer(NewTransferViewActor))
 }
