@@ -1,0 +1,13 @@
+syntax = "proto3";
+package messages;
+import "github.com/AsynkronIT/protoactor-go/actor/protos.proto";
+
+
+message Transaction {
+    string  Hash=1;
+    string  From=2;
+    string  To=3;
+    bytes   Value=4;
+    bool    Failed=5;
+}
+message SetTransaction { string Who=1; }

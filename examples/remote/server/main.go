@@ -1,12 +1,12 @@
 package main
 
 import (
+	"flag"
 	"github.com/AsynkronIT/goconsole"
 	"github.com/AsynkronIT/protoactor-go/actor"
 	"github.com/AsynkronIT/protoactor-go/remote"
 	"github.com/dylenfu/miner-protoactor/messages"
 	"runtime"
-	"flag"
 )
 
 var address = flag.String("addr", "127.0.0.1:9090", "set server address")
