@@ -8,4 +8,5 @@ import (
 
 func init() {
 	remote.Register("transaction-view", actor.FromProducer(NewTransactionViewActor))
+	remote.Register("transfer-view", actor.FromProducer(NewTransferViewActor))
 }

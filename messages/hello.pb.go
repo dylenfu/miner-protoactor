@@ -12,7 +12,7 @@ It has these top-level messages:
 	HelloRequest
 	HelloResponse
 	Transaction
-	SetTransaction
+	Transfer
 */
 package messages
 

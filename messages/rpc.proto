@@ -10,4 +10,11 @@ message Transaction {
     bytes   Value=4;
     bool    Failed=5;
 }
-message SetTransaction { string Who=1; }
+message Transfer {
+    string TxHash=1;
+    string From=2;
+    string To=3;
+    string BlockHash=4;
+    int64 BlockNumber=5;
+    string Value=6;
+}
