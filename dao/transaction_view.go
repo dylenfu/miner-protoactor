@@ -6,7 +6,7 @@ import (
 )
 
 type Transaction struct {
-	ID int `gorm:"column:id;primary_key""`
+	ID     int    `gorm:"column:id;primary_key""`
 	From   string `gorm:"column:tx_from;type:varchar(42)"`
 	To     string `gorm:"column:tx_to;type:varchar(42)"`
 	Hash   string `gorm:"column:tx_hash;type:varchar(82)"`
